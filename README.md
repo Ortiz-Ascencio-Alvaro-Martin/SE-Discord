@@ -4,6 +4,8 @@ Simulador económico de una **cafetería de especialidad en Guadalajara, Jalisco
 
 El sistema modela la gestión económica del negocio con tres agentes de IA, un motor de inferencias IF-THEN, eventos macroeconómicos aleatorios y una base de datos SQLite persistente. Todos los montos están en **pesos mexicanos (MXN)**.
 
+**[Agregar TAI a tu servidor de Discord](https://discord.com/oauth2/authorize?client_id=1511180179395838083)** · **[Prototipo en Figma](https://gown-kinder-24829009.figma.site/)**
+
 ---
 
 ## Características
@@ -52,7 +54,7 @@ Discord Embed              resultado visible para el usuario
 
 ```bash
 # 1. Clona el repositorio
-git clone https://github.com/<tu-usuario>/SE-Discord.git
+git clone https://github.com/Ortiz-Ascencio-Alvaro-Martin/SE-Discord.git
 cd SE-Discord
 
 # 2. Crea y activa un entorno virtual (recomendado)
@@ -134,6 +136,7 @@ SE-Discord/
 │   └── dashboard.py     # Comando /dashboard
 └── docs/
     ├── GG_registro_Proy.pdf   # Documento de entrega
+    ├── GG_registro_Proy.tex   # Fuente LaTeX
     └── manual.pdf             # Manual de usuario
 ```
 
@@ -181,6 +184,17 @@ Flujo neto              = ingresos − (costos_fijos + costos_variables)
 - Python 3.11 — Lenguaje principal
 - SQLite3 — Base de datos embebida
 - LaTeX / MiKTeX — Documentación técnica
+- [Figma](https://gown-kinder-24829009.figma.site/) — Prototipo de interfaz
+
+---
+
+## Links
+
+| Recurso | URL |
+|---|---|
+| Invitar el bot | [discord.com/oauth2/authorize?client_id=1511180179395838083](https://discord.com/oauth2/authorize?client_id=1511180179395838083) |
+| Prototipo Figma | [gown-kinder-24829009.figma.site](https://gown-kinder-24829009.figma.site/) |
+| Repositorio | [github.com/Ortiz-Ascencio-Alvaro-Martin/SE-Discord](https://github.com/Ortiz-Ascencio-Alvaro-Martin/SE-Discord) |
 
 ---
 

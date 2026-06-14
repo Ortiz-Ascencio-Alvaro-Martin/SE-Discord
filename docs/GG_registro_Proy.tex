@@ -4,8 +4,6 @@
 \usepackage[spanish,es-noquoting,es-noshorthands]{babel}
 \usepackage[a4paper, margin=2.5cm]{geometry}
 \setlength{\headheight}{14.5pt}
-\usepackage{graphicx}
-\usepackage{float}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -109,8 +107,10 @@
   \end{tabular}
 
   \vfill
-  {\small\color{gray} Repositorio:
-  \url{https://github.com/xxcactusxx/SE-Discord}}
+  {\small\color{gray}
+  Repositorio: \url{https://github.com/Ortiz-Ascencio-Alvaro-Martin/SE-Discord}\\[2pt]
+  Prototipo: \url{https://gown-kinder-24829009.figma.site/}\\[2pt]
+  Invitar bot: \url{https://discord.com/oauth2/authorize?client_id=1511180179395838083}}
 \end{titlepage}
 
 \tableofcontents
@@ -485,53 +485,6 @@ El usuario puede siempre saber \emph{por qué} el sistema tomó una decisión.
 \end{center}
 
 % ============================================================
-%  7. CAPTURAS DEL SISTEMA
-% ============================================================
-\section{Capturas del Sistema}
-
-\subsection*{7.1 Lista de comandos slash}
-
-\begin{figure}[H]
-  \centering
-  \IfFileExists{screenshots/cmd_list.png}{%
-    \fbox{\includegraphics[width=0.75\textwidth]{screenshots/cmd_list.png}}%
-  }{%
-    \fbox{\parbox{0.75\textwidth}{\centering\vspace{1cm}
-    \texttt{[screenshots/cmd\_list.png]}\\\vspace{0.3cm}
-    Lista de slash commands del bot TAI en Discord.\vspace{1cm}}}%
-  }
-  \caption{Todos los slash commands registrados en Discord.}
-\end{figure}
-
-\subsection*{7.2 Dashboard -- Estado del negocio}
-
-\begin{figure}[H]
-  \centering
-  \IfFileExists{screenshots/dashboard.png}{%
-    \fbox{\includegraphics[width=0.85\textwidth]{screenshots/dashboard.png}}%
-  }{%
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
-    \texttt{[screenshots/dashboard.png]}\\\vspace{0.3cm}
-    Dashboard con caja, inventario, indicadores y ultimo ciclo.\vspace{1.5cm}}}%
-  }
-  \caption{Embed \texttt{/dashboard} con inventario, indicadores y ultimo ciclo.}
-\end{figure}
-
-\subsection*{7.3 Resultado de un ciclo (/ciclo\_avanzar)}
-
-\begin{figure}[H]
-  \centering
-  \IfFileExists{screenshots/ciclo.png}{%
-    \fbox{\includegraphics[width=0.85\textwidth]{screenshots/ciclo.png}}%
-  }{%
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{1.5cm}
-    \texttt{[screenshots/ciclo.png]}\\\vspace{0.3cm}
-    Resultado del ciclo: evento global, tazas vendidas, flujo neto, botones.\vspace{1.5cm}}}%
-  }
-  \caption{Resultado de \texttt{/ciclo\_avanzar} con botones interactivos.}
-\end{figure}
-
-% ============================================================
 %  8. BASE DE DATOS
 % ============================================================
 \section{Base de Datos}
@@ -614,6 +567,7 @@ se crea automáticamente en la raíz del proyecto.
   LaTeX / MiKTeX & 2024 & Documentación técnica y manual \\
   Git / GitHub & 2.x & Control de versiones y entrega \\
   Discord Developer Portal & -- & Registro del bot y permisos \\
+  Figma & -- & Prototipo de interfaz (\url{https://gown-kinder-24829009.figma.site/}) \\
   \bottomrule
 \end{tabular}
 \end{center}
@@ -692,7 +646,7 @@ para un usuario no técnico.
 
 \begin{lstlisting}[style=python, language={}]
 # 1. Clona el repositorio
-git clone https://github.com/<usuario>/SE-Discord.git
+git clone https://github.com/Ortiz-Ascencio-Alvaro-Martin/SE-Discord.git
 cd SE-Discord
 
 # 2. (Recomendado) Crea un entorno virtual
@@ -740,13 +694,13 @@ cinco tablas del esquema.
 
 \subsection*{11.6 Invitar el bot a tu servidor}
 
-\begin{enumerate}
-  \item En el Developer Portal, ve a \textbf{OAuth2 > URL Generator}.
-  \item Selecciona los scopes \texttt{bot} y \texttt{applications.commands}.
-  \item En Bot Permissions activa: \textit{Send Messages}, \textit{Use Slash Commands},
-        \textit{Embed Links}, \textit{Read Message History}.
-  \item Copia la URL generada, pégala en el navegador e invita el bot.
-\end{enumerate}
+Usa el enlace oficial de instalación:
+
+\begin{center}
+  \url{https://discord.com/oauth2/authorize?client_id=1511180179395838083}
+\end{center}
+
+Abre el enlace en el navegador, selecciona tu servidor y acepta los permisos solicitados.
 
 \subsection*{11.7 Guía de uso — Comandos}
 
