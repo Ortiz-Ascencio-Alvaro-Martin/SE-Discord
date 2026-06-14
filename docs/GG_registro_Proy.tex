@@ -15,6 +15,8 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
 \usepackage{pgfplots}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit}
@@ -527,6 +529,111 @@ El usuario puede siempre saber \emph{por qué} el sistema tomó una decisión.
   \bottomrule
 \end{tabular}
 \end{center}
+
+% ============================================================
+%  7. CAPTURAS DEL SISTEMA
+% ============================================================
+\section{Capturas del Sistema}
+
+\subsection*{7.1 Comandos disponibles}
+
+\begin{figure}[H]
+  \centering
+  \IfFileExists{screenshots/cmd_list.png}{%
+    \includegraphics[width=0.72\textwidth]{screenshots/cmd_list.png}%
+  }{%
+    \fbox{\parbox{0.72\textwidth}{\centering\vspace{0.8cm}
+    \texttt{screenshots/cmd\_list.png}\vspace{0.8cm}}}%
+  }
+  \caption{Los 7 slash commands registrados en Discord: \texttt{/ajustar\_precio},
+    \texttt{/borrar\_negocio}, \texttt{/ciclo\_avanzar}, \texttt{/crear\_negocio},
+    \texttt{/dashboard}, \texttt{/marketing}, \texttt{/proveedor}.}
+\end{figure}
+
+\subsection*{7.2 Creación de un negocio}
+
+\begin{figure}[H]
+  \centering
+  \IfFileExists{screenshots/crear_negocio.png}{%
+    \includegraphics[width=0.78\textwidth]{screenshots/crear_negocio.png}%
+  }{%
+    \fbox{\parbox{0.78\textwidth}{\centering\vspace{0.8cm}
+    \texttt{screenshots/crear\_negocio.png}\vspace{0.8cm}}}%
+  }
+  \caption{\texttt{/crear\_negocio} — cafeter\'ia creada en Providencia con
+    multiplicador de renta $\times 1.5$ y demanda $\times 1.2$. Caja inicial \$100,000 MXN.}
+\end{figure}
+
+\subsection*{7.3 Dashboard de estado financiero}
+
+\begin{figure}[H]
+  \centering
+  \IfFileExists{screenshots/dashboard.png}{%
+    \includegraphics[width=0.72\textwidth]{screenshots/dashboard.png}%
+  }{%
+    \fbox{\parbox{0.72\textwidth}{\centering\vspace{0.8cm}
+    \texttt{screenshots/dashboard.png}\vspace{0.8cm}}}%
+  }
+  \caption{\texttt{/dashboard} — inventario desglosado por insumo, indicadores econ\'omicos
+    (margen de contribuci\'on, punto de equilibrio, costo variable) y color condicional.}
+\end{figure}
+
+\subsection*{7.4 Resultado de un ciclo fiscal}
+
+\begin{figure}[H]
+  \centering
+  \IfFileExists{screenshots/ciclo.png}{%
+    \includegraphics[width=0.78\textwidth]{screenshots/ciclo.png}%
+  }{%
+    \fbox{\parbox{0.78\textwidth}{\centering\vspace{0.8cm}
+    \texttt{screenshots/ciclo.png}\vspace{0.8cm}}}%
+  }
+  \caption{\texttt{/ciclo\_avanzar} — evento global ``Helada en Brasil'' eleva el costo
+    del grano 25\,\%. Se muestran tazas vendidas, ingresos, flujo neto, caja final
+    y el n\'umero de reglas disparadas. Botones: Avanzar ciclo, Ver explicaci\'on, Pagar N\'omina.}
+\end{figure}
+
+\subsection*{7.5 Reporte del Agente Supervisor}
+
+\begin{figure}[H]
+  \centering
+  \IfFileExists{screenshots/supervisor.png}{%
+    \includegraphics[width=0.72\textwidth]{screenshots/supervisor.png}%
+  }{%
+    \fbox{\parbox{0.72\textwidth}{\centering\vspace{0.8cm}
+    \texttt{screenshots/supervisor.png}\vspace{0.8cm}}}%
+  }
+  \caption{Reporte del Agente 3 (Supervisor) — explica en lenguaje natural las decisiones
+    tomadas por el motor de inferencias, incluyendo el cambio de precio y su justificaci\'on.}
+\end{figure}
+
+\subsection*{7.6 Compra de insumos al proveedor}
+
+\begin{figure}[H]
+  \centering
+  \IfFileExists{screenshots/proveedor.png}{%
+    \includegraphics[width=0.78\textwidth]{screenshots/proveedor.png}%
+  }{%
+    \fbox{\parbox{0.78\textwidth}{\centering\vspace{0.8cm}
+    \texttt{screenshots/proveedor.png}\vspace{0.8cm}}}%
+  }
+  \caption{\texttt{/proveedor} — compra de Leche entera: se descuentan \$120 MXN de caja
+    y se suman 30 tazas al inventario. El dashboard refleja el cambio en tiempo real.}
+\end{figure}
+
+\subsection*{7.7 Eliminación de negocio}
+
+\begin{figure}[H]
+  \centering
+  \IfFileExists{screenshots/borrar_negocio.png}{%
+    \includegraphics[width=0.72\textwidth]{screenshots/borrar_negocio.png}%
+  }{%
+    \fbox{\parbox{0.72\textwidth}{\centering\vspace{0.8cm}
+    \texttt{screenshots/borrar\_negocio.png}\vspace{0.8cm}}}%
+  }
+  \caption{\texttt{/borrar\_negocio} — elimina la cafeter\'ia con todos sus datos
+    tras confirmaci\'on del usuario.}
+\end{figure}
 
 % ============================================================
 %  8. BASE DE DATOS

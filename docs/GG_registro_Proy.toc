@@ -5,8 +5,9 @@
 \contentsline {section}{\numberline {4}Base de Conocimiento}{4}{section.4}%
 \contentsline {section}{\numberline {5}Inferencias Utilizadas}{5}{section.5}%
 \contentsline {section}{\numberline {6}Explicación de los Agentes}{6}{section.6}%
-\contentsline {section}{\numberline {7}Base de Datos}{8}{section.7}%
-\contentsline {section}{\numberline {8}Herramientas Utilizadas}{8}{section.8}%
-\contentsline {section}{\numberline {9}Entregables}{9}{section.9}%
-\contentsline {section}{\numberline {10}Conclusiones}{9}{section.10}%
-\contentsline {section}{\numberline {11}Manual de Usuario}{11}{section.11}%
+\contentsline {section}{\numberline {7}Capturas del Sistema}{8}{section.7}%
+\contentsline {section}{\numberline {8}Base de Datos}{11}{section.8}%
+\contentsline {section}{\numberline {9}Herramientas Utilizadas}{12}{section.9}%
+\contentsline {section}{\numberline {10}Entregables}{13}{section.10}%
+\contentsline {section}{\numberline {11}Conclusiones}{13}{section.11}%
+\contentsline {section}{\numberline {12}Manual de Usuario}{14}{section.12}%

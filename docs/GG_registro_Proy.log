@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.19)  14 JUN 2026 16:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.19)  14 JUN 2026 16:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -802,6 +802,14 @@ LaTeX Info: Redefining \Relbar on input line 970.
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
 )
+(C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count356
+\float@exts=\toks48
+\float@box=\box86
+\@float@everytoks=\toks49
+\@floatcapt=\box87
+)
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/latex/pgfplots\pgfplots.sty
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.rev
 ision.tex)
@@ -811,12 +819,12 @@ Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
 e.tex
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotscore
 .code.tex
-\t@pgfplots@toka=\toks48
-\t@pgfplots@tokb=\toks49
-\t@pgfplots@tokc=\toks50
+\t@pgfplots@toka=\toks50
+\t@pgfplots@tokb=\toks51
+\t@pgfplots@tokc=\toks52
 \pgfplots@tmpa=\dimen306
-\c@pgfplots@coordindex=\count356
-\c@pgfplots@scanlineindex=\count357
+\c@pgfplots@coordindex=\count357
+\c@pgfplots@scanlineindex=\count358
 
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\pgfplots
 sysgeneric.code.tex))
@@ -827,9 +835,9 @@ ib\pgfplotsoldpgfsupp_loader.code.tex
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibr
 aryfpu.code.tex)
 Package pgfplots: loading complementary utilities for your pgf version...
-\t@pgf@toka=\toks51
-\t@pgf@tokb=\toks52
-\t@pgf@tokc=\toks53
+\t@pgf@toka=\toks53
+\t@pgf@tokb=\toks54
+\t@pgf@tokc=\toks55
 
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/oldpgfcompat
 ib\pgfplotsoldpgfsupp_pgfutil-common-lists.tex))
@@ -841,14 +849,14 @@ e\pgfplotsliststructure.code.tex)
 e\pgfplotsliststructureext.code.tex)
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructur
 e\pgfplotsarray.code.tex
-\c@pgfplotsarray@tmp=\count358
+\c@pgfplotsarray@tmp=\count359
 )
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructur
 e\pgfplotsmatrix.code.tex)
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/numtable\pgf
 plotstableshared.code.tex
-\c@pgfplotstable@counta=\count359
-\t@pgfplotstable@a=\toks54
+\c@pgfplotstable@counta=\count360
+\t@pgfplotstable@a=\toks56
 )
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructur
 e\pgfplotsdeque.code.tex)
@@ -860,7 +868,7 @@ sbinary.data.code.tex))
 sutil.verb.code.tex)
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\pgflibr
 arypgfplots.surfshading.code.tex
-\c@pgfplotslibrarysurf@no=\count360
+\c@pgfplotslibrarysurf@no=\count361
 
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\pgflibra
 rypgfplots.surfshading.pgfsys-pdftex.def)))
@@ -897,11 +905,11 @@ decorations.code.tex
 \pgfdecoratedinputsegmentcompleteddistance=\dimen309
 \pgfdecoratedinputsegmentremainingdistance=\dimen310
 \pgf@decorate@distancetomove=\dimen311
-\pgf@decorate@repeatstate=\count361
+\pgf@decorate@repeatstate=\count362
 \pgfdecorationsegmentamplitude=\dimen312
 \pgfdecorationsegmentlength=\dimen313
 )
-\tikz@lib@dec@box=\box86
+\tikz@lib@dec@box=\box88
 )
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tik
 z/libraries\tikzlibrarydecorations.pathmorphing.code.tex
@@ -913,7 +921,7 @@ z/libraries\tikzlibrarydecorations.pathreplacing.code.tex
 ions\pgflibrarydecorations.pathreplacing.code.tex))
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\tikzlib
 rarypgfplots.contourlua.code.tex)
-\pgfplots@numplots=\count362
+\pgfplots@numplots=\count363
 \pgfplots@xmin@reg=\dimen314
 \pgfplots@xmax@reg=\dimen315
 \pgfplots@ymin@reg=\dimen316
@@ -966,7 +974,7 @@ l.image.code.tex
 File: tikzlibraryfill.image.code.tex 2026/04/23 v1.2.0 Image filling library
 \l__tikzfill_tmpa_dim=\dimen324
 \l__tikzfill_tmpb_dim=\dimen325
-\l__tikzfill_img_box=\box87
+\l__tikzfill_img_box=\box89
 ))
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbskinsjigsa
 w.code.tex
@@ -979,16 +987,16 @@ Library (tcolorbox): 'tcbbreakable.code.tex' version '6.9.0'
 Package: pdfcol 2022-09-21 v1.7 Handle new color stacks for pdfTeX (HO)
 )
 Package pdfcol Info: New color stack `tcb@breakable' = 1 on input line 23.
-\tcb@testbox=\box88
-\tcb@totalupperbox=\box89
-\tcb@totallowerbox=\box90
+\tcb@testbox=\box90
+\tcb@totalupperbox=\box91
+\tcb@totallowerbox=\box92
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 29.
+Package hyperref Info: Option `colorlinks' set `true' on input line 31.
 
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count363
+\l__color_backend_stack_int=\count364
 ) (GG_registro_Proy.aux
 LaTeX Info: Redefining \. on input line 7.
 LaTeX Info: Redefining \% on input line 7.
@@ -997,26 +1005,26 @@ Package babel Info: 'spanish' activates 'spanish' shorthands.
 )
 \openout1 = `GG_registro_Proy.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Info: Redefining \. on input line 71.
-LaTeX Info: Redefining \% on input line 71.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Info: Redefining \. on input line 73.
+LaTeX Info: Redefining \% on input line 73.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1056,17 +1064,17 @@ LaTeX Info: Redefining \% on input line 71.
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count364
+\scratchcounter=\count365
 \scratchdimen=\dimen326
-\scratchbox=\box91
-\nofMPsegments=\count365
-\nofMParguments=\count366
-\everyMPshowfont=\toks55
-\MPscratchCnt=\count367
+\scratchbox=\box93
+\nofMPsegments=\count366
+\nofMParguments=\count367
+\everyMPshowfont=\toks57
+\MPscratchCnt=\count368
 \MPscratchDim=\dimen327
-\MPnumerator=\count368
-\makeMPintoPDFobject=\count369
-\everyMPtoPDFconversion=\toks56
+\MPnumerator=\count369
+\makeMPintoPDFobject=\count370
+\everyMPtoPDFconversion=\toks58
 )
 (C:\Users\gomao\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -1078,8 +1086,8 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-\c@lstlisting=\count370
-Package hyperref Info: Link coloring ON on input line 71.
+\c@lstlisting=\count371
+Package hyperref Info: Link coloring ON on input line 73.
  (GG_registro_Proy.out) (GG_registro_Proy.out)
 \@outlinefile=\write4
 \openout4 = `GG_registro_Proy.out'.
@@ -1103,9 +1111,9 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.118 \newpage
+l.120 \newpage
                [1]
-Overfull \hbox (13.23161pt too wide) in paragraph at lines 171--173
+Overfull \hbox (13.23161pt too wide) in paragraph at lines 173--175
 []\T1/cmr/m/n/12 Discord mues-tra el re-sul-ta-do co-mo un \T1/cmr/m/it/12 em-b
 ed \T1/cmr/m/n/12 con co-lor con-di-cio-nal (ver-de/amarillo/rojo
  []
@@ -1115,36 +1123,134 @@ File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
 [2]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 282.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 284.
 
-Overfull \hbox (11.53822pt too wide) in paragraph at lines 287--287
+Overfull \hbox (11.53822pt too wide) in paragraph at lines 289--289
 []|\T1/cmtt/m/n/12 cogs/simulacion.py| 
  []
 
 
-Overfull \hbox (5.36473pt too wide) in paragraph at lines 288--288
+Overfull \hbox (5.36473pt too wide) in paragraph at lines 290--290
 []|\T1/cmtt/m/n/12 cogs/dashboard.py| 
  []
 
 [3] [4] [5]
-Overfull \hbox (33.91565pt too wide) in paragraph at lines 466--468
+Overfull \hbox (33.91565pt too wide) in paragraph at lines 468--470
 []\T1/cmr/m/n/12 Traduce el tex-to o co-man-do del usua-rio en una es-truc-tu-r
 a \T1/cmtt/m/n/12 Intencion(accion, parametros)\T1/cmr/m/n/12 . 
  []
 
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 470.
-[6] [7]
-Overfull \hbox (116.94872pt too wide) in paragraph at lines 604--617
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 472.
+[6]
+<screenshots/cmd_list.png, id=141, 573.94424pt x 311.36325pt>
+File: screenshots/cmd_list.png Graphic file (type png)
+<use screenshots/cmd_list.png>
+Package pdftex.def Info: screenshots/cmd_list.png  used on input line 547.
+(pdftex.def)             Requested size: 327.7763pt x 177.81621pt.
+
+Underfull \hbox (badness 5893) in paragraph at lines 550--550
+[]\T1/cmr/m/n/12 Figura 1: []Los 7 slash com-mands re-gis-tra-dos en Dis-cord: 
+\T1/cmtt/m/n/12 /ajustar_precio\T1/cmr/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 550--550
+\T1/cmtt/m/n/12 /borrar_negocio\T1/cmr/m/n/12 , \T1/cmtt/m/n/12 /ciclo_avanzar\
+T1/cmr/m/n/12 , \T1/cmtt/m/n/12 /crear_negocio\T1/cmr/m/n/12 , \T1/cmtt/m/n/12 
+/dashboard\T1/cmr/m/n/12 , \T1/cmtt/m/n/12 /marketing\T1/cmr/m/n/12 ,
+ []
+
+[7]
+<screenshots/crear_negocio.png, id=166, 468.5505pt x 103.587pt>
+File: screenshots/crear_negocio.png Graphic file (type png)
+<use screenshots/crear_negocio.png>
+Package pdftex.def Info: screenshots/crear_negocio.png  used on input line 562.
+
+(pdftex.def)             Requested size: 355.08984pt x 78.50565pt.
+<screenshots/dashboard.png, id=167, 411.33675pt x 317.988pt>
+File: screenshots/dashboard.png Graphic file (type png)
+<use screenshots/dashboard.png>
+Package pdftex.def Info: screenshots/dashboard.png  used on input line 576.
+(pdftex.def)             Requested size: 327.7763pt x 253.40091pt.
+ [8
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.580 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.580 
+       <./screenshots/cmd_list.png> <./screenshots/crear_negocio.png>]
+<screenshots/ciclo.png, id=176, 593.8185pt x 483.60675pt>
+File: screenshots/ciclo.png Graphic file (type png)
+<use screenshots/ciclo.png>
+Package pdftex.def Info: screenshots/ciclo.png  used on input line 590.
+(pdftex.def)             Requested size: 355.08984pt x 289.18484pt.
+ [9
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.595 
+       <./screenshots/dashboard.png>]
+<screenshots/supervisor.png, id=183, 459.51675pt x 156.585pt>
+File: screenshots/supervisor.png Graphic file (type png)
+<use screenshots/supervisor.png>
+Package pdftex.def Info: screenshots/supervisor.png  used on input line 605.
+(pdftex.def)             Requested size: 327.7763pt x 111.6946pt.
+<screenshots/proveedor.png, id=184, 397.485pt x 410.7345pt>
+File: screenshots/proveedor.png Graphic file (type png)
+<use screenshots/proveedor.png>
+Package pdftex.def Info: screenshots/proveedor.png  used on input line 619.
+(pdftex.def)             Requested size: 355.08984pt x 366.93762pt.
+ [10
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.623 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.623 
+       <./screenshots/ciclo.png> <./screenshots/supervisor.png>]
+<screenshots/borrar_negocio.png, id=193, 339.06676pt x 72.27pt>
+File: screenshots/borrar_negocio.png Graphic file (type png)
+<use screenshots/borrar_negocio.png>
+Package pdftex.def Info: screenshots/borrar_negocio.png  used on input line 633
+.
+(pdftex.def)             Requested size: 327.7763pt x 69.8636pt.
+ [11
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.661 \end{center}
+                  
+pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.661 \end{center}
+                   <./screenshots/proveedor.png> <./screenshots/borrar_negocio.
+png>]
+Overfull \hbox (116.94872pt too wide) in paragraph at lines 711--724
  [] 
  []
 
-[8]
-Overfull \hbox (359.4378pt too wide) in paragraph at lines 646--662
+[12]
+Overfull \hbox (359.4378pt too wide) in paragraph at lines 753--769
  [] 
  []
 
-[9] [10] [11] [12] [13] [14] (GG_registro_Proy.aux
+[13] [14] [15] [16] [17] (GG_registro_Proy.aux
 LaTeX Info: Redefining \. on input line 7.
 LaTeX Info: Redefining \% on input line 7.
 )
@@ -1153,13 +1259,13 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `GG_registro_Proy.out' has not changed.
-(rerunfilecheck)             Checksum: CFA94045F58DECC87872060232A620AF;1523.
+(rerunfilecheck)             Checksum: A1370DB4A6BE906AB34858074D72AAA8;1674.
  ) 
 Here is how much of TeX's memory you used:
- 39484 strings out of 467871
- 915007 string characters out of 5418376
- 1741874 words of memory out of 5000000
- 67682 multiletter control sequences out of 15000+600000
+ 39614 strings out of 467871
+ 917821 string characters out of 5418376
+ 1743266 words of memory out of 5000000
+ 67797 multiletter control sequences out of 15000+600000
  643866 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,12n,121p,731b,2199s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1187,9 +1293,9 @@ s/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/gomao/AppData/Local
 /Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/gomao/AppDa
 ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/goma
 o/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on GG_registro_Proy.pdf (15 pages, 325641 bytes).
+Output written on GG_registro_Proy.pdf (18 pages, 586371 bytes).
 PDF statistics:
- 883 PDF objects out of 1000 (max. 8388607)
- 114 named destinations out of 1000 (max. 500000)
- 101 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 924 PDF objects out of 1000 (max. 8388607)
+ 125 named destinations out of 1000 (max. 500000)
+ 144 words of extra memory for PDF output out of 10000 (max. 10000000)
 
