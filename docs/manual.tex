@@ -1,0 +1,935 @@
+% ============================================================
+%  MANUAL DE USUARIO — ASESOR DE NEGOCIOS IA (Bot de Discord)
+%  Sistema Experto · Cafetería de Especialidad GDL
+% ============================================================
+\documentclass[12pt, a4paper]{article}
+
+% --- Idioma y codificación ---
+\usepackage[spanish]{babel}
+\decimalpoint
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% --- Tipografía ---
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- Márgenes ---
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm]{geometry}
+
+% --- Colores y gráficos ---
+\usepackage[dvipsnames, table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, shapes.geometric, positioning, fit, backgrounds, calc, babel}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- Tablas ---
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+
+% --- Matemáticas ---
+\usepackage{amsmath, amssymb}
+
+% --- Código ---
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  rulecolor=\color{gray!40},
+  breaklines=true,
+  keywordstyle=\color{NavyBlue}\bfseries,
+  commentstyle=\color{gray},
+  stringstyle=\color{ForestGreen},
+  language=Python,
+}
+
+% --- Cajas y alertas ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+\newtcolorbox{infobox}[1][]{
+  colback=NavyBlue!8, colframe=NavyBlue!60,
+  title=#1, fonttitle=\bfseries,
+  arc=3pt, boxrule=0.8pt,
+}
+\newtcolorbox{warnbox}[1][]{
+  colback=Orange!10, colframe=Orange!70,
+  title=#1, fonttitle=\bfseries,
+  arc=3pt, boxrule=0.8pt,
+}
+\newtcolorbox{rulebox}{
+  colback=ForestGreen!8, colframe=ForestGreen!60,
+  arc=3pt, boxrule=0.8pt,
+}
+
+% --- Encabezados y pie ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Asesor de Negocios IA — Bot de Discord}
+\fancyhead[R]{\small \leftmark}
+\fancyfoot[C]{\thepage}
+
+% --- Hipervínculos ---
+\usepackage[colorlinks=true, linkcolor=NavyBlue, urlcolor=NavyBlue]{hyperref}
+
+% --- Enumeración ---
+\usepackage{enumitem}
+
+% --- Imagen (por si acaso) ---
+\usepackage{graphicx}
+
+% ============================================================
+\title{
+  \vspace{-1cm}
+  {\Large\bfseries Asesor de Negocios IA}\\[0.4em]
+  {\large Bot de Discord — Sistema Experto}\\[0.3em]
+  {\normalsize Cafetería de Especialidad en la Zona Metropolitana de Guadalajara}\\[1em]
+  \rule{\linewidth}{0.5pt}\\[0.5em]
+  {\normalsize Manual de Usuario y Documentación Técnica}
+}
+\author{Proyecto SE}
+\date{\today}
+
+% ============================================================
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{Introducción}
+% ============================================================
+
+\textbf{Asesor de Negocios IA} es un simulador económico de una cafetería de especialidad
+ubicada en la Zona Metropolitana de Guadalajara (ZMG), implementado como bot de Discord.
+El sistema constituye un \textbf{sistema experto}: el dominio de conocimiento es la gestión
+económica del negocio, y el simulador aplica ese conocimiento a través de reglas de inferencia
+para guiar al usuario en sus decisiones.
+
+\subsection{Objetivo pedagógico}
+
+El proyecto demuestra los componentes fundamentales de los sistemas expertos:
+\begin{itemize}
+  \item \textbf{Base de conocimiento}: fórmulas económicas y reglas IF-THEN calibradas
+        a la realidad de GDL (precios MXN, zonas, eventos locales).
+  \item \textbf{Motor de inferencia}: evaluación de reglas sobre el contexto del negocio.
+  \item \textbf{Interfaz de explicación}: el Agente Supervisor traduce las decisiones
+        del sistema a lenguaje natural.
+\end{itemize}
+
+\subsection{Tecnologías empleadas}
+
+\begin{center}
+\begin{tabular}{ll}
+  \toprule
+  Componente & Tecnología \\
+  \midrule
+  Plataforma & Discord (slash commands) \\
+  Lenguaje   & Python 3.11+ \\
+  Framework  & discord.py 2.x \\
+  Base de datos & SQLite 3 \\
+  ORM        & Sin ORM (sqlite3 nativo) \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Arquitectura del Sistema}
+% ============================================================
+
+El sistema sigue un esquema de \textbf{tres agentes} como requisito de la rúbrica.
+Cada agente tiene una responsabilidad única y se comunica con los demás a través
+de la base de datos compartida.
+
+\subsection{Diagrama de agentes}
+
+\begin{center}
+\begin{tikzpicture}[
+  agent/.style={
+    draw=NavyBlue, fill=NavyBlue!12, rounded corners=6pt,
+    minimum width=3.2cm, minimum height=1.4cm,
+    text width=3cm, align=center, font=\small\bfseries
+  },
+  db/.style={
+    draw=ForestGreen, fill=ForestGreen!12,
+    cylinder, shape border rotate=90, aspect=0.3,
+    minimum width=2.8cm, minimum height=1cm,
+    font=\small\bfseries, align=center
+  },
+  user/.style={
+    draw=Orange!80, fill=Orange!15, rounded corners=4pt,
+    minimum width=2.4cm, minimum height=1cm,
+    font=\small\bfseries, align=center
+  },
+  arr/.style={-{Stealth[length=7pt]}, thick},
+  darr/.style={<->, thick, dashed, gray},
+  node distance=1.6cm
+]
+
+% Nodos
+\node[user] (U) {Usuario\\Discord};
+\node[agent, right=2.2cm of U] (A1)
+  {Agente 1\\Atención\\(AgenteAtencion)};
+\node[agent, right=2cm of A1] (A2)
+  {Agente 2\\Pedido/Inferencia\\(AgentePedido)};
+\node[agent, below=1.8cm of A2] (A3)
+  {Agente 3\\Supervisor\\(AgenteSupervisor)};
+\node[db, below=1.8cm of A1] (DB) {Base de\\Datos SQLite};
+
+% Flechas principales
+\draw[arr] (U) -- node[above, font=\tiny]{comando} (A1);
+\draw[arr] (A1) -- node[above, font=\tiny]{intención} (A2);
+\draw[arr] (A2) -- node[right, font=\tiny]{persiste} (DB);
+\draw[arr] (DB) -- node[left, font=\tiny]{lee} (A3);
+\draw[arr] (A3) -| node[below, font=\tiny, near end]{explicación} (U);
+\draw[darr] (A1) -- (DB);
+
+% Etiquetas de BD
+\node[font=\tiny, gray, below=0.05cm of DB, align=center, text width=4cm]
+  {negocios $\cdot$ inventario $\cdot$ inferencias \\ finanzas $\cdot$ eventos $\cdot$ historial};
+
+\end{tikzpicture}
+\end{center}
+
+\subsection{Descripción de los agentes}
+
+\begin{infobox}[Agente 1 — Atención (\texttt{AgenteAtencion})]
+Interpreta el comando o texto del usuario y lo convierte en una
+\textbf{Intención estructurada} (\texttt{accion}, \texttt{parametros}).
+Acciones posibles: \texttt{avanzar\_ciclo}, \texttt{comprar},
+\texttt{ajustar\_precio}, \texttt{desconocida}.
+\end{infobox}
+
+\begin{infobox}[Agente 2 — Pedido/Inferencia (\texttt{AgentePedido})]
+Núcleo del sistema. Ejecuta el siguiente pipeline por ciclo:
+\begin{enumerate}[leftmargin=*]
+  \item Construye el contexto económico del negocio (zona, inventario, marketing).
+  \item Inyecta el evento macroeconómico global del ciclo.
+  \item Calcula la demanda con elasticidad-precio.
+  \item Corre el motor de reglas IF-THEN.
+  \item Resuelve el ciclo económico (ventas, costos, flujo).
+  \item Persiste todo en la BD.
+  \item Consume inventario (con merma 7.5\%) y decae marketing.
+\end{enumerate}
+\end{infobox}
+
+\begin{infobox}[Agente 3 — Supervisor (\texttt{AgenteSupervisor})]
+Lee \texttt{registro\_inferencias} y traduce las decisiones del motor a
+\textbf{lenguaje natural}. Provee la explicabilidad requerida por los
+sistemas expertos. El usuario lo activa con el botón \textbf{Ver explicación}.
+\end{infobox}
+
+\subsection{Flujo completo de un ciclo}
+
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={draw=NavyBlue!70, fill=NavyBlue!10, rounded corners=4pt,
+              minimum width=3.4cm, minimum height=0.8cm,
+              font=\small, align=center},
+  dec/.style={draw=Orange!80, fill=Orange!10, diamond, aspect=2.2,
+              font=\scriptsize, align=center},
+  arr/.style={-{Stealth[length=6pt]}, thick},
+  node distance=0.85cm
+]
+
+\node[box] (start) {Usuario: /ciclo\_avanzar};
+\node[box, below=of start] (ctx)   {Construir contexto\\(zona, inventario, precios)};
+\node[box, below=of ctx]   (ev)    {Generar evento global\\(CATALOGO aleatorio)};
+\node[box, below=of ev]    (dem)   {Calcular demanda\\(elasticidad-precio)};
+\node[box, below=of dem]   (rules) {Motor de reglas\\IF-THEN};
+\node[box, below=of rules] (sim)   {Resolver ciclo\\(ventas, costos, flujo)};
+\node[box, below=of sim]   (pers)  {Persistir en BD\\(finanzas, evento, inferencias)};
+\node[box, below=of pers]  (inv)   {Consumir inventario\\(merma 7.5\%)};
+\node[box, below=of inv]   (mkt)   {Decaer marketing $\times 0.5$};
+\node[box, below=of mkt]   (out)   {Embed resultado\\+ Panel de botones};
+
+\foreach \a/\b in {start/ctx, ctx/ev, ev/dem, dem/rules,
+                    rules/sim, sim/pers, pers/inv, inv/mkt, mkt/out}
+  \draw[arr] (\a) -- (\b);
+
+\end{tikzpicture}
+\end{center}
+
+% ============================================================
+\section{Motor de Inferencias}
+% ============================================================
+
+\subsection{Arquitectura del motor}
+
+El motor evalúa una lista ordenada de funciones \texttt{Regla :: dict -> Inferencia | None}.
+Cada regla es \textbf{pura}: no modifica la BD, solo razona sobre el contexto.
+El Agente 2 ejecuta las reglas y persiste los resultados en \texttt{registro\_inferencias}.
+
+\begin{lstlisting}[caption={Estructura de una regla}]
+def r_precio_alto(ctx: dict) -> Inferencia | None:
+    if ctx["precio_usuario"] > ctx["precio_mercado"]:
+        sobreprecio = (ctx["precio_usuario"] / ctx["precio_mercado"] - 1) * 100
+        return Inferencia(
+            regla="IF precio > mercado THEN demanda cae exponencialmente",
+            entrada=f"precio={ctx['precio_usuario']:.0f}, mercado={ctx['precio_mercado']:.0f}",
+            resultado=f"Sobreprecio de {sobreprecio:.0f}% -> menos clientes",
+            explicacion="Cobras por encima del promedio...",
+        )
+    return None
+\end{lstlisting}
+
+\subsection{Catálogo de reglas}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\ttfamily\small}l X X}
+  \toprule
+  \textbf{Regla} & \textbf{Condición (IF)} & \textbf{Acción (THEN)} \\
+  \midrule
+  r\_precio\_alto &
+    \texttt{precio\_usuario > precio\_mercado (\$55)} &
+    Dispara alerta de sobreprecio; la elasticidad castiga la demanda exponencialmente. \\
+  \addlinespace
+  r\_stock\_insuficiente &
+    \texttt{inventario\_tazas < demanda\_estimada} &
+    Alerta de desabasto: se pierden ventas. Sugiere reabastecer con \texttt{/proveedor}. \\
+  \addlinespace
+  r\_grano\_especialidad &
+    \texttt{tipo\_grano == "especialidad"} &
+    +15\% reputación/demanda. La calidad del grano compensa precios altos. \\
+  \addlinespace
+  r\_riesgo\_bancarrota &
+    \texttt{caja < costos\_fijos} &
+    \textbf{Alerta crítica}: la caja no cubre los costos fijos del ciclo. \\
+  \bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Estructura de datos \texttt{Inferencia}}
+
+\begin{lstlisting}
+@dataclass
+class Inferencia:
+    regla:       str   # nombre legible de la regla disparada
+    entrada:     str   # valores que la activaron
+    resultado:   str   # que se decidio
+    explicacion: str   # lenguaje natural para el Supervisor
+    efectos:     dict  # cambios a aplicar (ej. reputacion_mult: 1.15)
+\end{lstlisting}
+
+% ============================================================
+\section{Modelo Económico}
+% ============================================================
+
+\subsection{Fórmulas principales}
+
+\subsubsection{Demanda con elasticidad-precio}
+
+\begin{equation}
+  D = D_{\text{base}} \cdot \left(\frac{P_{\text{mercado}}}{P_{\text{usuario}}}\right)^{1.5}
+\end{equation}
+
+donde $P_{\text{mercado}} = \$55$ MXN/taza y el exponente $1.5$ modela una
+elasticidad moderada-alta (especialidad en GDL es sensible al precio).
+
+\subsubsection{Unidades vendidas}
+
+\begin{equation}
+  U = \min\bigl(D,\ C_{\text{capacidad}},\ I_{\text{inventario}}\bigr)
+\end{equation}
+
+con $C_{\text{capacidad}} = 700$ tazas/ciclo.
+
+\subsubsection{Margen de contribución}
+
+\begin{equation}
+  MC = P_{\text{usuario}} - CV_{\text{unit}}
+\end{equation}
+
+\subsubsection{Punto de equilibrio}
+
+\begin{equation}
+  PE = \frac{CF}{MC} \quad \text{(tazas por ciclo)}
+\end{equation}
+
+\subsubsection{Flujo neto}
+
+\begin{equation}
+  FN = U \cdot P_{\text{usuario}} - \bigl(U \cdot CV_{\text{unit}} + CF\bigr)
+\end{equation}
+
+\subsubsection{Costo variable unitario con merma}
+
+\begin{equation}
+  CV_{\text{unit}} = \bigl(C_{\text{grano}} + C_{\text{leche}} + C_{\text{vaso}}\bigr) \times (1 + m)
+\end{equation}
+
+donde $m = 7.5\%$ es la merma estimada por ciclo.
+
+\subsection{Parámetros calibrados a GDL (MXN)}
+
+\begin{center}
+\begin{tabular}{llr}
+  \toprule
+  \textbf{Parámetro} & \textbf{Descripción} & \textbf{Valor} \\
+  \midrule
+  \multicolumn{3}{l}{\textit{Costos variables por taza}} \\
+  $C_{\text{grano comercial}}$   & Grano estándar         & \$6.00 MXN \\
+  $C_{\text{grano especialidad}}$& Chiapas/Veracruz/Nayarit & \$14.00 MXN \\
+  $C_{\text{leche}}$             & Leche entera           & \$4.00 MXN \\
+  $C_{\text{vegetal}}$           & Avena/almendra         & \$9.00 MXN \\
+  $C_{\text{vaso}}$              & Empaque desechable     & \$3.00 MXN \\
+  $m$                            & Merma                  & 7.5\% \\
+  \addlinespace
+  \multicolumn{3}{l}{\textit{Costos fijos por ciclo (mensual) — base}} \\
+  Renta base                     & $\times$ mult. zona    & \$18{,}000 MXN \\
+  Barista Jr.                    & Nómina                 & \$8{,}500 MXN \\
+  Servicios (CFE/agua/gas)       &                        & \$4{,}500 MXN \\
+  Mantenimiento espresso         &                        & \$1{,}500 MXN \\
+  \textbf{Total base}            &                        & $\mathbf{\$32{,}500}$ \textbf{MXN} \\
+  \addlinespace
+  \multicolumn{3}{l}{\textit{Otros parámetros}} \\
+  $P_{\text{mercado}}$           & Precio referencia GDL  & \$55 MXN/taza \\
+  Precio inicial                 & Al crear negocio       & \$55 MXN/taza \\
+  Caja inicial                   &                        & \$100{,}000 MXN \\
+  Capacidad                      & Tazas/ciclo            & 700 tazas \\
+  Demanda base                   & $\times$ mult. zona    & 500 tazas \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Ejemplo: costos variables calculados}
+
+\begin{center}
+\begin{tabular}{lcc}
+  \toprule
+  Combinación & $CV_{\text{unit}}$ (sin merma) & $CV_{\text{unit}}$ (con 7.5\% merma) \\
+  \midrule
+  Grano comercial + leche   & \$13.00 & \$13.98 \\
+  Grano comercial + vegetal & \$18.00 & \$19.35 \\
+  Especialidad + leche      & \$21.00 & \$22.58 \\
+  Especialidad + vegetal    & \$26.00 & \$27.95 \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Sistema de zonas — ZMG}
+
+La zona elegida al crear el negocio afecta la renta y la demanda base
+mediante multiplicadores independientes:
+
+\begin{equation}
+  CF_{\text{zona}} = \$18{,}000 \times m_{\text{renta}} + \$14{,}500
+\end{equation}
+\begin{equation}
+  D_{\text{base,zona}} = 500 \times m_{\text{demanda}}
+\end{equation}
+
+\begin{center}
+\begin{tabular}{llccr}
+  \toprule
+  \textbf{Zona} & \textbf{Perfil} & $m_{\text{renta}}$ & $m_{\text{demanda}}$ & \textbf{CF/ciclo} \\
+  \midrule
+  Centro Histórico      & Alto flujo, turismo          & 1.0 & 1.1 & \$32{,}500 \\
+  Col. Americana / Chap.& Hub de especialidad          & 1.4 & 1.3 & \$39{,}700 \\
+  Providencia           & Comercial, poder adquisitivo & 1.5 & 1.2 & \$41{,}500 \\
+  Andares / Pta. Hierro & Premium, plazas              & 1.8 & 1.1 & \$46{,}900 \\
+  Tlaquepaque / Tonalá  & Turístico, artesanal         & 1.1 & 1.0 & \$34{,}300 \\
+  Periferia             & Renta baja, menos tráfico    & 0.6 & 0.8 & \$25{,}300 \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Análisis de rentabilidad por zona}
+
+El siguiente gráfico muestra el punto de equilibrio (en tazas/ciclo) para
+cada zona, asumiendo precio \$55, grano comercial + leche:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  ybar, bar width=14pt,
+  width=12cm, height=7cm,
+  symbolic x coords={Periferia, Centro, Tlaquepaque,
+                     Americana, Providencia, Andares},
+  xtick=data,
+  x tick label style={font=\small, rotate=20, anchor=east},
+  ylabel={Punto de equilibrio (tazas/ciclo)},
+  ymin=0, ymax=1400,
+  ymajorgrids=true, grid style=dashed,
+  nodes near coords,
+  nodes near coords style={font=\tiny},
+  bar shift=0pt,
+  title={\small Punto de equilibrio por zona (precio \$55, grano comercial + leche)},
+  title style={font=\small},
+  cycle list={
+    {fill=ForestGreen!70, draw=ForestGreen!90},
+    {fill=NavyBlue!50,    draw=NavyBlue!70},
+    {fill=NavyBlue!65,    draw=NavyBlue!85},
+    {fill=Orange!65,      draw=Orange!85},
+    {fill=Orange!80,      draw=Orange!100},
+    {fill=red!65,         draw=red!85},
+  },
+]
+\addplot coordinates {
+  (Periferia,    613)
+  (Centro,       792)
+  (Tlaquepaque,  835)
+  (Americana,    966)
+  (Providencia, 1010)
+  (Andares,     1141)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+% ============================================================
+\section{Base de Datos}
+% ============================================================
+
+\subsection{Diagrama entidad-relación}
+
+\begin{center}
+\begin{tikzpicture}[
+  tbl/.style={draw=NavyBlue!70, fill=NavyBlue!8, rounded corners=4pt,
+              font=\small, inner sep=6pt},
+  hdr/.style={fill=NavyBlue!50, text=white, font=\small\bfseries, rounded corners=2pt,
+              inner sep=4pt},
+  rel/.style={-{Stealth[length=6pt]}, thick, NavyBlue!70},
+  node distance=1.2cm and 2.2cm
+]
+
+% negocios
+\node[tbl] (N) {
+  \begin{tabular}{l}
+    \rowcolor{NavyBlue!50}
+    \color{white}\textbf{negocios} \\
+    \underline{negocio\_id} \\
+    owner\_id \\
+    owner\_name \\
+    nombre \\
+    caja \\
+    precio\_taza \\
+    ciclo\_actual \\
+    zona \\
+    marketing\_bonus \\
+  \end{tabular}
+};
+
+% inventario
+\node[tbl, right=2.5cm of N] (INV) {
+  \begin{tabular}{l}
+    \rowcolor{ForestGreen!50}
+    \color{white}\textbf{inventario} \\
+    \underline{id} \\
+    negocio\_id (FK) \\
+    tipo\_insumo \\
+    tazas\_equiv \\
+  \end{tabular}
+};
+
+% finanzas_registro
+\node[tbl, below=1.5cm of N] (FIN) {
+  \begin{tabular}{l}
+    \rowcolor{Orange!60}
+    \color{white}\textbf{finanzas\_registro} \\
+    \underline{id} \\
+    negocio\_id (FK) \\
+    ciclo \\
+    ingresos \\
+    costos\_fijos \\
+    costos\_variables \\
+    flujo\_neto \\
+    caja\_final \\
+  \end{tabular}
+};
+
+% historial_eventos
+\node[tbl, right=2.5cm of FIN] (EV) {
+  \begin{tabular}{l}
+    \rowcolor{Orange!60}
+    \color{white}\textbf{historial\_eventos} \\
+    \underline{id} \\
+    negocio\_id (FK) \\
+    ciclo \\
+    tipo \\
+    descripcion \\
+    impacto\_json \\
+  \end{tabular}
+};
+
+% registro_inferencias
+\node[tbl, below=1.5cm of FIN] (INF) {
+  \begin{tabular}{l}
+    \rowcolor{Plum!50}
+    \color{white}\textbf{registro\_inferencias} \\
+    \underline{id} \\
+    negocio\_id (FK) \\
+    ciclo \\
+    agente \\
+    regla \\
+    entrada \\
+    resultado \\
+    explicacion \\
+  \end{tabular}
+};
+
+% Relaciones
+\draw[rel] (INV.west)  -- node[above, font=\tiny]{1:N} (N.east);
+\draw[rel] (FIN.north) -- node[right, font=\tiny]{1:N} (N.south);
+\draw[rel] (EV.west)   -- (FIN.east);
+\draw[rel] (INF.north) -- node[right, font=\tiny]{1:N} (FIN.south);
+
+\end{tikzpicture}
+\end{center}
+
+\subsection{Descripción de tablas}
+
+\begin{longtable}{lll}
+  \toprule
+  \textbf{Tabla} & \textbf{Campo} & \textbf{Descripción} \\
+  \midrule
+  \endhead
+  \texttt{negocios} & negocio\_id & PK autoincrement \\
+  & owner\_id & Discord user ID \\
+  & caja & Efectivo disponible (MXN) \\
+  & precio\_taza & Precio de venta actual \\
+  & zona & Zona ZMG elegida \\
+  & marketing\_bonus & Multiplicador activo (decae 50\%/ciclo) \\
+  \addlinespace
+  \texttt{inventario} & tipo\_insumo & grano\_comercial, grano\_especialidad, leche, vegetal \\
+  & tazas\_equiv & Tazas que puede producir el insumo disponible \\
+  \addlinespace
+  \texttt{finanzas\_registro} & ciclo & Número de ciclo (mes) \\
+  & flujo\_neto & Ingresos $-$ (CF + CV) \\
+  & caja\_final & Caja después del ciclo \\
+  \addlinespace
+  \texttt{historial\_eventos} & tipo & Categoría del evento (clima, tendencia, etc.) \\
+  & impacto\_json & Multiplicadores aplicados en JSON \\
+  \addlinespace
+  \texttt{registro\_inferencias} & agente & Quién disparó la regla (pedido/atencion) \\
+  & regla & Nombre legible de la regla IF-THEN \\
+  & explicacion & Texto para el Agente Supervisor \\
+  \bottomrule
+\end{longtable}
+
+% ============================================================
+\section{Eventos Macroeconómicos}
+% ============================================================
+
+Cada ciclo el sistema elige \textbf{un evento} del catálogo mediante selección
+ponderada. El evento ``Mes estable'' tiene peso $3\times$ para que el mercado
+no sea caótico (peso $1$ para cada evento perturbador).
+
+\begin{center}
+\begin{tabular}{llll}
+  \toprule
+  \textbf{Tipo} & \textbf{Descripción} & \textbf{Variable afectada} & \textbf{Impacto} \\
+  \midrule
+  \texttt{clima}      & Helada en Brasil; grano sube       & \texttt{costo\_variable\_unit} & $\times 1.25$ \\
+  \texttt{tendencia}  & Viral en TikTok; demanda sube      & \texttt{demanda\_base}         & $\times 1.40$ \\
+  \texttt{inflacion}  & Inflación local; costos fijos suben& \texttt{costos\_fijos}         & $\times 1.05$ \\
+  \texttt{competencia}& Rival cerca; demanda baja          & \texttt{demanda\_base}         & $\times 0.85$ \\
+  \texttt{cosecha}    & Cosecha Colombia; grano baja       & \texttt{costo\_variable\_unit} & $\times 0.90$ \\
+  \texttt{estable}    & Mes tranquilo                      & ---                            & sin cambio    \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  ybar, bar width=16pt,
+  width=10cm, height=5.5cm,
+  symbolic x coords={clima, tendencia, inflacion, competencia, cosecha, estable},
+  xtick=data,
+  x tick label style={font=\small, rotate=25, anchor=east},
+  ylabel={Peso de selección},
+  ymin=0, ymax=4,
+  ymajorgrids=true, grid style=dashed,
+  nodes near coords,
+  title={\small Distribución de probabilidad de eventos},
+  title style={font=\small},
+  cycle list={
+    {fill=red!60, draw=red!80},
+    {fill=green!60, draw=green!80},
+    {fill=Orange!70, draw=Orange!90},
+    {fill=red!40, draw=red!60},
+    {fill=green!40, draw=green!60},
+    {fill=gray!50, draw=gray!70},
+  },
+]
+\addplot coordinates {
+  (clima,1)(tendencia,1)(inflacion,1)(competencia,1)(cosecha,1)(estable,3)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+% ============================================================
+\section{Sistema de Inventario}
+% ============================================================
+
+El inventario almacena insumos como \textbf{tazas-equivalente}: la cantidad de
+tazas que se pueden producir con el insumo disponible. Se descuenta
+automáticamente al vender, con una merma del 7.5\%.
+
+\subsection{Insumos disponibles}
+
+\begin{center}
+\begin{tabular}{lrrl}
+  \toprule
+  \textbf{Insumo} & \textbf{Costo/lote} & \textbf{Tazas/lote} & \textbf{Efecto} \\
+  \midrule
+  Grano comercial       & \$300 MXN  & 50 & Costo variable base \\
+  Grano de especialidad & \$700 MXN  & 50 & +15\% demanda, mayor CV \\
+  Leche entera          & \$120 MXN  & 30 & Insumo base \\
+  Alternativas vegetales& \$270 MXN  & 30 & Mayor CV, segmento premium \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Flujo del inventario}
+
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={draw=NavyBlue!60, fill=NavyBlue!8, rounded corners=3pt,
+              minimum width=3.2cm, minimum height=0.7cm, font=\small, align=center},
+  arr/.style={-{Stealth[length=6pt]}, thick},
+  node distance=0.8cm
+]
+\node[box] (a) {Crear negocio};
+\node[box, right=1.5cm of a] (b) {Inventario inicial\\(100tz grano + 60tz leche)};
+\node[box, right=1.5cm of b] (c) {Compra /proveedor\\(suma tazas)};
+\node[box, below=1.2cm of c] (d) {Ciclo / Venta rápida\\(consume $U \times 1.075$)};
+\node[box, below=1.2cm of b] (e) {Inventario actualizado};
+
+\draw[arr] (a) -- (b);
+\draw[arr] (b) -- (c);
+\draw[arr] (c) -- (d);
+\draw[arr] (d) -- (e);
+\draw[arr] (e) -- (b) node[midway, left, font=\tiny]{reabastecer};
+\end{tikzpicture}
+\end{center}
+
+% ============================================================
+\section{Sistema de Marketing}
+% ============================================================
+
+El marketing se modela como un \textbf{bonus multiplicativo} sobre la demanda base
+que decae un 50\% cada ciclo, incentivando la reinversión continua.
+
+\begin{equation}
+  D_{\text{base,final}} = D_{\text{base}} \times (1 + b_{\text{mkt}})
+\end{equation}
+
+\begin{equation}
+  b_{\text{mkt}}^{(t+1)} = b_{\text{mkt}}^{(t)} \times 0.5
+\end{equation}
+
+\begin{center}
+\begin{tabular}{lrrl}
+  \toprule
+  \textbf{Campaña} & \textbf{Costo} & \textbf{Bonus demanda} & \textbf{Contexto} \\
+  \midrule
+  Redes sociales            & \$3{,}000 MXN & +10\% & Bajo costo, efecto moderado \\
+  Colaboración con influencer& \$8{,}000 MXN & +20\% & Mayor alcance \\
+  Descuento de apertura     & \$1{,}500 MXN & +25\% & Más demanda, precio efectivo menor \\
+  Evento de cata en tienda  & \$5{,}000 MXN & +15\% & Refuerza reputación de especialidad \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=10cm, height=5cm,
+  xlabel={Ciclos transcurridos},
+  ylabel={Bonus activo (\%)},
+  ymin=0, ymax=30,
+  xmin=0, xmax=6,
+  xtick={0,1,2,3,4,5,6},
+  ymajorgrids=true, grid style=dashed,
+  legend pos=north east,
+  title={\small Decaimiento del bonus de marketing por campaña},
+  title style={font=\small},
+]
+\addplot[NavyBlue, thick, mark=*]
+  coordinates {(0,20)(1,10)(2,5)(3,2.5)(4,1.25)(5,0.6)(6,0.3)};
+\addlegendentry{Influencer (+20\%)}
+
+\addplot[ForestGreen, thick, mark=square*]
+  coordinates {(0,10)(1,5)(2,2.5)(3,1.25)(4,0.6)(5,0.3)(6,0.15)};
+\addlegendentry{Redes sociales (+10\%)}
+
+\addplot[Orange, thick, mark=triangle*]
+  coordinates {(0,25)(1,12.5)(2,6.25)(3,3.12)(4,1.56)(5,0.78)(6,0.39)};
+\addlegendentry{Descuento (+25\%)}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+% ============================================================
+\section{Referencia de Comandos}
+% ============================================================
+
+\begin{center}
+\begin{tabularx}{\linewidth}{llX}
+  \toprule
+  \textbf{Comando} & \textbf{Parámetros} & \textbf{Descripción} \\
+  \midrule
+  \texttt{/crear\_negocio} & \texttt{nombre}, \texttt{zona} &
+    Crea la cafetería. Elige zona de 6 opciones de la ZMG. Caja inicial: \$100{,}000 MXN. \\
+  \addlinespace
+  \texttt{/ciclo\_avanzar} & --- &
+    Simula el siguiente mes: evento, inferencias, cálculo económico, actualiza BD. \\
+  \addlinespace
+  \texttt{/dashboard} & --- &
+    Panel completo: finanzas, inventario, último ciclo e indicadores. Selector si hay varios negocios. \\
+  \addlinespace
+  \texttt{/proveedor} & --- &
+    Abre Select Menu para comprar insumos (descuenta caja, suma inventario). \\
+  \addlinespace
+  \texttt{/marketing} & --- &
+    Abre Select Menu de 4 campañas de marketing. El bonus decae 50\%/ciclo. \\
+  \addlinespace
+  \texttt{/ajustar\_precio} & \texttt{precio} &
+    Cambia el precio de venta. Valida que sea $\geq$ costo variable (\$13 MXN). \\
+  \addlinespace
+  \texttt{/borrar\_negocio} & --- &
+    Elimina el negocio y todos sus datos con confirmación doble. \\
+  \bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Componentes interactivos (botones y selectores)}
+
+Tras ejecutar \texttt{/ciclo\_avanzar} aparece el \textbf{Panel de Ciclo}
+con cuatro botones:
+
+\begin{center}
+\begin{tabular}{lll}
+  \toprule
+  \textbf{Botón} & \textbf{Color} & \textbf{Función} \\
+  \midrule
+  Avanzar ciclo   & Azul (primario) & Corre el siguiente mes completo. \\
+  Ver explicación & Gris (secundario) & Muestra el reporte del Agente Supervisor. \\
+  Vender          & Verde & Venta rápida sin avanzar ciclo ni aplicar costos fijos. \\
+  Pagar Nómina    & Rojo & Descuenta \$8{,}500 MXN de caja manualmente. \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ============================================================
+\section{Guía de Inicio Rápido}
+% ============================================================
+
+\begin{enumerate}[leftmargin=*, label=\textbf{\arabic*.}]
+  \item \textbf{Crea tu cafetería}\\
+        \texttt{/crear\_negocio nombre:"La Brújula" zona:"Col. Americana / Chapultepec"}\\
+        Recibirás \$100{,}000 MXN de caja inicial y un inventario base de 100 tazas
+        de grano comercial y 60 de leche.
+
+  \item \textbf{Consulta tu estado}\\
+        \texttt{/dashboard} — revisa tu caja, inventario actual e indicadores
+        (margen de contribución y punto de equilibrio).
+
+  \item \textbf{Avanza tu primer ciclo}\\
+        \texttt{/ciclo\_avanzar} — el sistema generará un evento macroeconómico,
+        calculará ventas y actualizará tu caja. Aparecerá el panel de botones.
+
+  \item \textbf{Analiza las inferencias}\\
+        Pulsa \textbf{Ver explicación} para que el Agente Supervisor te explique
+        las reglas que se dispararon y por qué.
+
+  \item \textbf{Reabastece y estrategiza}
+  \begin{itemize}
+    \item \texttt{/proveedor} → compra grano de especialidad para mejorar reputación.
+    \item \texttt{/marketing} → lanza una campaña para subir la demanda.
+    \item \texttt{/ajustar\_precio} → experimenta con el precio y observa la elasticidad.
+  \end{itemize}
+\end{enumerate}
+
+\begin{warnbox}[Consejo estratégico]
+La zona \textbf{Col. Americana / Chapultepec} ofrece el mejor balance
+demanda/renta para un negocio rentable desde el ciclo 1. Las zonas
+premium (Andares) requieren volumen alto para superar el punto de equilibrio.
+\end{warnbox}
+
+% ============================================================
+\section{Ejemplo de Sesión}
+% ============================================================
+
+\begin{lstlisting}[language={}, caption={Ejemplo de salida de /ciclo\_avanzar}]
+Ciclo 3 - La Brujula
+Evento global: Tendencia viral en TikTok: la demanda sube 40%.
+
+Tazas vendidas    490
+Ingresos          $26,950
+Flujo neto        +$4,543
+Caja final        $71,234
+Reglas disparadas  1
+\end{lstlisting}
+
+\begin{lstlisting}[language={}, caption={Reporte del Supervisor (Ver explicacion)}]
+Decisiones tomadas por el sistema:
+
+- IF grano = especialidad THEN reputacion +15%
+    -> El grano de especialidad mejora la percepcion de calidad
+       y la reputacion de la marca.
+\end{lstlisting}
+
+% ============================================================
+\section{Consideraciones Técnicas}
+% ============================================================
+
+\subsection{Persistencia y transacciones}
+
+Todas las operaciones sobre la BD se realizan con \texttt{conn.commit()}
+explícito. Las operaciones críticas (compra de insumos, venta) verifican
+fondos antes de ejecutar para garantizar consistencia.
+
+\subsection{Pureza del motor de reglas}
+
+Las funciones en \texttt{rules.py} son \textbf{puras}: reciben un contexto
+como diccionario y devuelven una \texttt{Inferencia} o \texttt{None}, sin
+efectos secundarios. Esto facilita pruebas unitarias y la explicabilidad.
+
+\subsection{Escalabilidad del catálogo de reglas}
+
+Añadir una nueva regla consiste en:
+\begin{enumerate}
+  \item Definir \texttt{def r\_nueva(ctx: dict) -> Inferencia | None} en \texttt{rules.py}.
+  \item Añadirla a la lista \texttt{REGLAS}.
+\end{enumerate}
+No se requiere modificar ningún otro módulo.
+
+\subsection{Tests sugeridos (pytest)}
+
+\begin{lstlisting}[caption={Pruebas recomendadas para la presentación}]
+def test_punto_equilibrio():
+    cf, cv, p = 32500, 13.98, 55.0
+    pe = cf / (p - cv)
+    assert abs(pe - 793) < 5
+
+def test_elasticidad_precio():
+    d = demanda_estimada(500, 55, 110)  # precio doble
+    assert d < 500 * 0.5  # demanda cae mas del 50%
+
+def test_regla_bancarrota():
+    ctx = {"caja": 1000, "costos_fijos": 32500, ...}
+    inf = r_riesgo_bancarrota(ctx)
+    assert inf is not None
+\end{lstlisting}
+
+\vfill
+\hrule
+\vspace{0.4em}
+\begin{center}
+  \small Prototipo Figma: \url{https://gown-kinder-24829009.figma.site/}
+  \quad|\quad
+  Proyecto SE — Sistemas Expertos
+\end{center}
+
+\end{document}

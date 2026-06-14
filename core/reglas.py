@@ -1,9 +1,7 @@
 """
-rules.py
 Motor de inferencias (reglas IF-THEN). Cada regla recibe un "contexto" (dict
 con el estado del negocio + mercado) y devuelve una lista de Inferencia.
 Las reglas NO tocan la BD: solo razonan. El Agente 2 las ejecuta y persiste.
-Esto mantiene la logica pura y facil de explicar/probar.
 """
 from dataclasses import dataclass, field
 from typing import Callable
@@ -11,14 +9,13 @@ from typing import Callable
 
 @dataclass
 class Inferencia:
-    regla: str            # nombre legible de la regla disparada
-    entrada: str          # valores que la activaron
-    resultado: str        # que se decidio
-    explicacion: str      # por que (lenguaje natural, para el Supervisor)
-    efectos: dict = field(default_factory=dict)   # cambios a aplicar al estado
+    regla: str
+    entrada: str
+    resultado: str
+    explicacion: str
+    efectos: dict = field(default_factory=dict)
 
 
-# Cada regla es una funcion ctx -> Inferencia | None
 Regla = Callable[[dict], Inferencia | None]
 
 
@@ -75,7 +72,6 @@ def r_grano_especialidad(ctx: dict) -> Inferencia | None:
     return None
 
 
-# Orden de evaluacion del motor
 REGLAS: list[Regla] = [
     r_precio_alto,
     r_stock_insuficiente,

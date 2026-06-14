@@ -1,0 +1,41 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Objetivo pedagógico}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Tecnologías empleadas}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Arquitectura del Sistema}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Diagrama de agentes}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Descripción de los agentes}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Flujo completo de un ciclo}{5}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Motor de Inferencias}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Arquitectura del motor}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Catálogo de reglas}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Estructura de datos \texttt {Inferencia}}{6}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Modelo Económico}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Fórmulas principales}{7}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Demanda con elasticidad-precio}{7}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Unidades vendidas}{7}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Margen de contribución}{7}{subsubsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.4}Punto de equilibrio}{7}{subsubsection.4.1.4}%
+\contentsline {subsubsection}{\numberline {4.1.5}Flujo neto}{7}{subsubsection.4.1.5}%
+\contentsline {subsubsection}{\numberline {4.1.6}Costo variable unitario con merma}{7}{subsubsection.4.1.6}%
+\contentsline {subsection}{\numberline {4.2}Parámetros calibrados a GDL (MXN)}{8}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Ejemplo: costos variables calculados}{8}{subsubsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.3}Sistema de zonas — ZMG}{8}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Análisis de rentabilidad por zona}{9}{subsubsection.4.3.1}%
+\contentsline {section}{\numberline {5}Base de Datos}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Diagrama entidad-relación}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Descripción de tablas}{10}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Eventos Macroeconómicos}{11}{section.6}%
+\contentsline {section}{\numberline {7}Sistema de Inventario}{12}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Insumos disponibles}{12}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Flujo del inventario}{12}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Sistema de Marketing}{12}{section.8}%
+\contentsline {section}{\numberline {9}Referencia de Comandos}{13}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Componentes interactivos (botones y selectores)}{13}{subsection.9.1}%
+\contentsline {section}{\numberline {10}Guía de Inicio Rápido}{13}{section.10}%
+\contentsline {section}{\numberline {11}Ejemplo de Sesión}{14}{section.11}%
+\contentsline {section}{\numberline {12}Consideraciones Técnicas}{15}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Persistencia y transacciones}{15}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Pureza del motor de reglas}{15}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}Escalabilidad del catálogo de reglas}{15}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Tests sugeridos (pytest)}{15}{subsection.12.4}%

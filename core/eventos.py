@@ -1,8 +1,6 @@
 """
-events.py
 Motor de eventos macroeconomicos globales. Cada ciclo se puede inyectar un
-evento aleatorio que modifica multiplicadores del mercado (precio del grano,
-demanda base, renta). Se persiste en historial_eventos.
+evento aleatorio que modifica multiplicadores del mercado.
 """
 import json
 import random
@@ -13,7 +11,7 @@ from dataclasses import dataclass
 class EventoGlobal:
     tipo: str
     descripcion: str
-    impacto: dict          # multiplicadores: {"costo_grano":1.25, ...}
+    impacto: dict
 
 
 CATALOGO = [
@@ -53,7 +51,7 @@ CATALOGO = [
 def generar_evento(rng: random.Random | None = None) -> EventoGlobal:
     """Elige un evento. 'estable' pesa mas para que no todo sea caos."""
     rng = rng or random
-    pesos = [1, 1, 1, 1, 1, 3]      # 'estable' es el ultimo, con peso 3
+    pesos = [1, 1, 1, 1, 1, 3]
     return rng.choices(CATALOGO, weights=pesos, k=1)[0]
 
 

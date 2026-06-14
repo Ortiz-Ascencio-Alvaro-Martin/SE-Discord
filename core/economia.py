@@ -10,7 +10,6 @@ class ResultadoCiclo:
 
 
 def demanda_estimada(demanda_base: float, precio_mercado: float, precio_usuario: float) -> float:
-    # Modelo simple de elasticidad: si precio_usuario > precio_mercado, demanda cae.
     ratio = precio_mercado / max(0.01, precio_usuario)
     return demanda_base * (ratio ** 1.5)
 

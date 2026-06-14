@@ -1,26 +1,23 @@
 """
-agents.py
-Los 3 agentes del sistema experto (requisito de la rubrica).
+Los 3 agentes del sistema experto.
 
   Agente 1 - Atencion:   interpreta la intencion del usuario.
   Agente 2 - Pedido:     valida, infiere (motor de reglas), calcula y persiste.
   Agente 3 - Supervisor: explica las decisiones leyendo el registro de inferencias.
-
-Todos comparten una BD comun y dejan rastro en `registro_inferencias`.
 """
 from dataclasses import dataclass
 
-import database as db
-import simulation as sim
-import rules
-import events
+from . import bd as db
+from . import economia as sim
+from . import reglas as rules
+from . import eventos as events
 
 
 # ---------------- AGENTE 1: ATENCION ----------------
 
 @dataclass
 class Intencion:
-    accion: str            # 'avanzar_ciclo' | 'comprar' | 'ajustar_precio' | 'desconocida'
+    accion: str
     parametros: dict
 
 
@@ -48,38 +45,100 @@ class ResultadoAgentePedido:
     caja_final: float
 
 
+ZONAS = {
+    "centro":      {"mult_renta": 1.0, "mult_demanda": 1.1},
+    "americana":   {"mult_renta": 1.4, "mult_demanda": 1.3},
+    "providencia": {"mult_renta": 1.5, "mult_demanda": 1.2},
+    "andares":     {"mult_renta": 1.8, "mult_demanda": 1.1},
+    "tlaquepaque": {"mult_renta": 1.1, "mult_demanda": 1.0},
+    "periferia":   {"mult_renta": 0.6, "mult_demanda": 0.8},
+}
+
+_RENTA_BASE = 18_000.0
+_NOMINA = 8_500.0
+_COSTOS_FIJOS_SIN_RENTA = _NOMINA + 4_500.0 + 1_500.0
+
+_COSTO_GRANO = {"grano_comercial": 6.0, "grano_especialidad": 14.0}
+_COSTO_LECHE = {"leche": 4.0, "vegetal": 9.0}
+_COSTO_VASO = 3.0
+_MERMA = 0.075
+
+
+def calcular_venta_rapida(negocio: dict, inventario: dict) -> tuple[int, float]:
+    """Venta directa sin evento ni costos fijos. Retorna (unidades_vendidas, ingresos)."""
+    zona = negocio.get("zona") or "centro"
+    mult = ZONAS.get(zona, ZONAS["centro"])
+    marketing_bonus = negocio.get("marketing_bonus") or 0.0
+    tipo_grano = "especialidad" if inventario.get("grano_especialidad", 0) > 0 else "comercial"
+    demanda_base = 500.0 * mult["mult_demanda"]
+    if tipo_grano == "especialidad":
+        demanda_base *= 1.15
+    demanda_base *= (1 + marketing_bonus)
+    demanda = sim.demanda_estimada(demanda_base, 55.0, negocio["precio_taza"])
+    inventario_tazas = sum(inventario.values())
+    unidades = int(min(demanda, 700.0, inventario_tazas))
+    return unidades, unidades * negocio["precio_taza"]
+
+
+def parametros_negocio(negocio: dict, inventario: dict) -> dict:
+    """Devuelve costos_fijos y costo_variable_unit para un negocio dado."""
+    zona = negocio.get("zona") or "centro"
+    mult = ZONAS.get(zona, ZONAS["centro"])
+    return {
+        "costos_fijos": _RENTA_BASE * mult["mult_renta"] + _COSTOS_FIJOS_SIN_RENTA,
+        "costo_variable_unit": _calcular_costo_variable(inventario),
+    }
+
+
+def _calcular_costo_variable(inventario: dict) -> float:
+    grain = _COSTO_GRANO["grano_especialidad"] if inventario.get("grano_especialidad", 0) > 0 else _COSTO_GRANO["grano_comercial"]
+    leche = _COSTO_LECHE["vegetal"] if (inventario.get("vegetal", 0) > 0 and inventario.get("leche", 0) == 0) else _COSTO_LECHE["leche"]
+    return (grain + leche + _COSTO_VASO) * (1 + _MERMA)
+
+
 class AgentePedido:
     """Procesa el ciclo: inyecta evento, corre reglas, calcula y persiste."""
 
     def procesar_ciclo(self, negocio, rng=None) -> ResultadoAgentePedido:
         nuevo_ciclo = negocio["ciclo_actual"] + 1
 
-        # Contexto base del mercado
+        zona = negocio.get("zona") or "centro"
+        mult = ZONAS.get(zona, ZONAS["centro"])
+        costos_fijos = _RENTA_BASE * mult["mult_renta"] + _COSTOS_FIJOS_SIN_RENTA
+
+        inventario = db.obtener_inventario_detalle(negocio["negocio_id"])
+        inventario_tazas = sum(inventario.values()) or 600.0
+
+        tipo_grano = "especialidad" if inventario.get("grano_especialidad", 0) > 0 else "comercial"
+        costo_variable_unit = _calcular_costo_variable(inventario)
+
+        marketing_bonus = negocio.get("marketing_bonus") or 0.0
+        demanda_base = 500.0 * mult["mult_demanda"]
+        if tipo_grano == "especialidad":
+            demanda_base *= 1.15
+        demanda_base *= (1 + marketing_bonus)
+
         ctx = {
-            "demanda_base": 500.0,
-            "precio_mercado": 45.0,
+            "demanda_base": demanda_base,
+            "precio_mercado": 55.0,
             "precio_usuario": negocio["precio_taza"],
-            "costo_variable_unit": 18.0,
-            "costos_fijos": 6000.0,
+            "costo_variable_unit": costo_variable_unit,
+            "costos_fijos": costos_fijos,
             "caja": negocio["caja"],
-            "inventario_tazas": 600.0,
-            "tipo_grano": "comercial",
+            "inventario_tazas": inventario_tazas,
+            "tipo_grano": tipo_grano,
             "capacidad": 700.0,
         }
 
-        # 1) Evento global del ciclo
         evento = events.generar_evento(rng)
         ctx = events.aplicar_impacto(ctx, evento)
 
-        # 2) Demanda con elasticidad
         ctx["demanda"] = sim.demanda_estimada(
             ctx["demanda_base"], ctx["precio_mercado"], ctx["precio_usuario"]
         )
 
-        # 3) Motor de inferencias (reglas IF-THEN)
         inferencias = rules.evaluar(ctx)
 
-        # 4) Resolucion economica del ciclo
         rc = sim.resolver_ciclo(
             demanda=ctx["demanda"],
             capacidad=ctx["capacidad"],
@@ -90,7 +149,6 @@ class AgentePedido:
         )
         caja_final = negocio["caja"] + rc.flujo_neto
 
-        # 5) Persistir todo
         nid = negocio["negocio_id"]
         with db.get_connection() as conn:
             conn.execute(
@@ -118,6 +176,9 @@ class AgentePedido:
                 inf.entrada, inf.resultado, inf.explicacion,
             )
 
+        db.consumir_inventario(nid, rc.unidades_vendidas)
+        db.decaer_marketing(nid)
+
         return ResultadoAgentePedido(evento, rc, inferencias, caja_final)
 
 
@@ -139,5 +200,5 @@ class AgenteSupervisor:
 
         lineas = ["**Decisiones tomadas por el sistema:**"]
         for i in infs:
-            lineas.append(f"\u2022 {i['resultado']}\n  \u21B3 {i['explicacion']}")
+            lineas.append(f"• {i['resultado']}\n  ↳ {i['explicacion']}")
         return "\n".join(lineas)
