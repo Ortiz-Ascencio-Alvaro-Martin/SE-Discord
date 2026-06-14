@@ -4,7 +4,7 @@ Simulador económico de una **cafetería de especialidad en Guadalajara, Jalisco
 
 El sistema modela la gestión económica del negocio con tres agentes de IA, un motor de inferencias IF-THEN, eventos macroeconómicos aleatorios y una base de datos SQLite persistente. Todos los montos están en **pesos mexicanos (MXN)**.
 
-**[Agregar TAI a tu servidor de Discord](https://discord.com/oauth2/authorize?client_id=1511180179395838083)** · **[Prototipo en Figma](https://gown-kinder-24829009.figma.site/)**
+**[Agregar TAI a tu servidor de Discord](https://discord.com/oauth2/authorize?client_id=1511180179395838083)** · **[Prototipo en Figma](https://gown-kinder-24829009.figma.site/)** · **[Video demostrativo](https://youtu.be/YBMIabivi1g)**
 
 ---
 
@@ -194,6 +194,7 @@ Flujo neto              = ingresos − (costos_fijos + costos_variables)
 |---|---|
 | Invitar el bot | [discord.com/oauth2/authorize?client_id=1511180179395838083](https://discord.com/oauth2/authorize?client_id=1511180179395838083) |
 | Prototipo Figma | [gown-kinder-24829009.figma.site](https://gown-kinder-24829009.figma.site/) |
+| Video demostrativo | [youtu.be/YBMIabivi1g](https://youtu.be/YBMIabivi1g) |
 | Repositorio | [github.com/Ortiz-Ascencio-Alvaro-Martin/SE-Discord](https://github.com/Ortiz-Ascencio-Alvaro-Martin/SE-Discord) |
 
 ---

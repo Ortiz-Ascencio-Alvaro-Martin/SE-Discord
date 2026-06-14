@@ -2,10 +2,11 @@
 \contentsline {section}{\numberline {1}Objetivo}{2}{section.1}%
 \contentsline {section}{\numberline {2}Descripción del Sistema}{2}{section.2}%
 \contentsline {section}{\numberline {3}Arquitectura del Sistema}{3}{section.3}%
-\contentsline {section}{\numberline {4}Base de Conocimiento}{3}{section.4}%
-\contentsline {section}{\numberline {5}Inferencias Utilizadas}{4}{section.5}%
+\contentsline {section}{\numberline {4}Base de Conocimiento}{4}{section.4}%
+\contentsline {section}{\numberline {5}Inferencias Utilizadas}{5}{section.5}%
 \contentsline {section}{\numberline {6}Explicación de los Agentes}{6}{section.6}%
 \contentsline {section}{\numberline {7}Base de Datos}{8}{section.7}%
 \contentsline {section}{\numberline {8}Herramientas Utilizadas}{8}{section.8}%
-\contentsline {section}{\numberline {9}Conclusiones}{9}{section.9}%
-\contentsline {section}{\numberline {10}Manual de Usuario}{10}{section.10}%
+\contentsline {section}{\numberline {9}Entregables}{9}{section.9}%
+\contentsline {section}{\numberline {10}Conclusiones}{9}{section.10}%
+\contentsline {section}{\numberline {11}Manual de Usuario}{11}{section.11}%

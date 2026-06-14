@@ -109,6 +109,7 @@
   \vfill
   {\small\color{gray}
   Repositorio: \url{https://github.com/Ortiz-Ascencio-Alvaro-Martin/SE-Discord}\\[2pt]
+  Video: \url{https://youtu.be/YBMIabivi1g}\\[2pt]
   Prototipo: \url{https://gown-kinder-24829009.figma.site/}\\[2pt]
   Invitar bot: \url{https://discord.com/oauth2/authorize?client_id=1511180179395838083}}
 \end{titlepage}
@@ -198,33 +199,76 @@ SE-Discord/
 \subsection*{Diagrama de arquitectura}
 
 \begin{center}
-\begin{tikzpicture}[
-  node distance=1.4cm and 2cm,
-  box/.style={draw, rounded corners=4pt, minimum width=3.2cm,
-              minimum height=0.8cm, align=center, font=\small},
-  agent/.style={box, fill=accent!15, draw=accent},
-  core/.style={box, fill=verde!15, draw=verde!60!black},
-  db/.style={box, fill=gray!15, draw=gray},
-  user/.style={box, fill=amarillo!40, draw=amarillo!80!black},
-  arr/.style={-Stealth, thick},
+\begin{tikzpicture}[x=1cm, y=1cm,
+  agente/.style={
+    draw=accent, fill=accent!12, rounded corners=5pt,
+    minimum width=3.2cm, minimum height=0.9cm,
+    align=center, font=\small\bfseries, text=accent!80!black
+  },
+  modulo/.style={
+    draw=verde!70!black, fill=verde!10, rounded corners=4pt,
+    minimum width=3.4cm, minimum height=0.8cm,
+    align=center, font=\small
+  },
+  bd/.style={
+    draw=gray!60, fill=gray!12, rounded corners=4pt,
+    minimum width=3.4cm, minimum height=0.8cm,
+    align=center, font=\small
+  },
+  usuario/.style={
+    draw=amarillo!80!black, fill=amarillo!25, rounded corners=5pt,
+    minimum width=3.2cm, minimum height=0.9cm,
+    align=center, font=\small\bfseries
+  },
+  arr/.style={-Stealth, thick, color=gray!55},
+  lbl/.style={font=\tiny\itshape, color=gray!70},
 ]
-  \node[user] (u) {Usuario\\Discord};
-  \node[agent, right=2cm of u] (a1) {Agente 1\\Atención};
-  \node[agent, right=1.5cm of a1] (a2) {Agente 2\\Pedido};
-  \node[agent, below=1.4cm of a2] (a3) {Agente 3\\Supervisor};
-  \node[core, right=1.5cm of a2] (rules) {Motor\\IF-THEN};
-  \node[core, above=1.2cm of a2] (events) {Motor\\Eventos};
-  \node[core, right=1.5cm of rules] (econ) {Economía\\(funciones puras)};
-  \node[db, below=1.4cm of rules] (db) {SQLite\\se\_discord.db};
 
-  \draw[arr] (u) -- (a1) node[midway,above,font=\tiny]{comando};
-  \draw[arr] (a1) -- (a2) node[midway,above,font=\tiny]{intención};
-  \draw[arr] (events) -- (a2);
-  \draw[arr] (a2) -- (rules) node[midway,above,font=\tiny]{ctx};
-  \draw[arr] (rules) -- (econ) node[midway,above,font=\tiny]{ctx};
-  \draw[arr] (econ) -- (db) node[midway,right,font=\tiny]{persiste};
-  \draw[arr] (db) -- (a3);
-  \draw[arr] (a3.west) -- +(-0.6,0) |- (u.south) node[near end,left,font=\tiny]{explicación};
+  %% ---- Columna principal (flujo vertical, x=0) ----
+  \node[usuario] (u)  at (0,  0)    {Usuario \\ Discord};
+  \node[agente]  (a1) at (0, -2.2)  {Agente 1 \\ Atenci\'on};
+  \node[agente]  (a2) at (0, -4.4)  {Agente 2 \\ Pedido};
+  \node[agente]  (a3) at (0, -8.4)  {Agente 3 \\ Supervisor};
+
+  %% ---- M\'odulos de soporte (x=5.5) ----
+  \node[modulo] (ev)    at (5.5, -3.3)  {Motor de\\Eventos};
+  \node[modulo] (rules) at (5.5, -4.4)  {Motor IF-THEN};
+  \node[modulo] (econ)  at (5.5, -5.8)  {Econom\'ia\\(funciones puras)};
+  \node[bd]     (db)    at (5.5, -7.2)  {SQLite\\se\_discord.db};
+
+  %% ---- Flujo principal (vertical) ----
+  \draw[arr] (u)  -- (a1)
+    node[lbl, right=3pt, midway]{comando};
+  \draw[arr] (a1) -- (a2)
+    node[lbl, right=3pt, midway]{intenci\'on};
+  \draw[arr] (a2) -- (a3)
+    node[lbl, right=3pt, midway]{fin ciclo};
+
+  %% ---- Retorno al usuario (lado izquierdo) ----
+  \draw[arr] (a3.west) -- ++(-1.5, 0) |- (u.west)
+    node[lbl, pos=0.22, left=2pt]{explicaci\'on};
+
+  %% ---- Conexiones de soporte ----
+  % Eventos -> Agente 2 (L invertida: horizontal luego vertical)
+  \draw[arr] (ev.west) -| (a2.east)
+    node[lbl, pos=0.12, above=1pt]{evento global};
+
+  % Agente 2 -> Motor IF-THEN (horizontal directo)
+  \draw[arr] (a2.east) -- (rules.west)
+    node[lbl, above=1pt, midway]{ctx};
+
+  % Motor IF-THEN -> Economia
+  \draw[arr] (rules.south) -- (econ.north)
+    node[lbl, right=2pt, midway]{inferencias};
+
+  % Economia -> SQLite
+  \draw[arr] (econ.south) -- (db.north)
+    node[lbl, right=2pt, midway]{persiste};
+
+  % SQLite -> Agente 3 (L: horizontal luego vertical)
+  \draw[arr] (db.west) -| (a3.east)
+    node[lbl, pos=0.12, below=1pt]{registro};
+
 \end{tikzpicture}
 \end{center}
 
@@ -594,7 +638,31 @@ se crea automáticamente en la raíz del proyecto.
 \end{tcolorbox}
 
 % ============================================================
-%  10. CONCLUSIONES
+%  10. ENTREGABLES
+% ============================================================
+\section{Entregables}
+
+\begin{center}
+\begin{tabular}{lll}
+  \toprule
+  Entregable & Descripci\'on & Enlace \\
+  \midrule
+  C\'odigo fuente & Repositorio GitHub con historial de desarrollo
+    & \url{https://github.com/Ortiz-Ascencio-Alvaro-Martin/SE-Discord} \\[4pt]
+  Video demostrativo & Explicaci\'on, arquitectura y demo en vivo (YouTube)
+    & \url{https://youtu.be/YBMIabivi1g} \\[4pt]
+  Prototipo de UI & Dise\~no de interfaz en Figma
+    & \url{https://gown-kinder-24829009.figma.site/} \\[4pt]
+  Bot en Discord & Invitaci\'on directa al servidor
+    & \url{https://discord.com/oauth2/authorize?client_id=1511180179395838083} \\[4pt]
+  Documento PDF & Este archivo (GG\_registro\_Proy.pdf)
+    & \texttt{docs/GG\_registro\_Proy.pdf} \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ============================================================
+%  11. CONCLUSIONES
 % ============================================================
 \section{Conclusiones}
 
